@@ -184,3 +184,5 @@ def main():
 
 
 main()
+
+# Bu proyekt Burxon tomonidan yangilandi
