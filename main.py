@@ -1,29 +1,14 @@
-from telegram import ReplyKeyboardMarkup, Bot
-from telegram.ext import (Updater, CommandHandler, ConversationHandler, MessageHandler, Filters)
-
-Tashkent = "Toshkent"
-Andijan = "Andijon"
-Ferghana = "Farg'ona"
-Namangan = "Namangan"
-Sirdarya = "Sirdaryo"
-Djizzak = "Jizzax"
-Samarkand = "Samarqand"
-Bukhara = "Buxoro"
-Navoi = "Navoi"
-Kashkadarya = "Qashqadaryo"
-Surhandarya = "Surxondaryo"
-Horezm = "Xorazm"
-Karakalpakistan = "Qoraqolpoqston"
-
-toshkent = ["Tashkent", "Toshkent", "Tawkent", "Toshkend", "Tashkend", "Tashkendan"]
-
-main_buttons = ReplyKeyboardMarkup([
-    [Tashkent, Sirdarya, Djizzak], [Andijan, Ferghana, Namangan], [Samarkand, Bukhara, Navoi],
-    [Kashkadarya, Surhandarya, Horezm], [Karakalpakistan]
-], resize_keyboard=True)
+from telegram import Bot
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
+from cities import fergana_name, andijon_name, tashkent_name
+from Keyboards import main_buttons
 
 STATE_CALENDAR = 1
 bot = Bot
+
+t_list = set()
+f_list = set()
+a_list = set()
 
 
 def start(update, context):
@@ -38,56 +23,62 @@ def start(update, context):
     return STATE_CALENDAR
 
 
-t_list = []
-
-
 def Tashkent_loads(update, context):
     if update.message.chat.type == "private":
         update.message.reply_text(
             'Endi men sizga Toshkent dagi yuklarni yuborib turaman 😊')
-        t_list.append(update.message.from_user.id)
+        t_list.add(update.message.from_user.id)
         print(t_list)
     elif update.message.chat.type == "supergroup":
-        print(update.message.from_user.id)
-        context.user_data["hudud"] = "Toshkent"
+        # print(update.message.from_user.id)
+        # context.user_data["hudud"] = "Tashkent"
         for lst in t_list:
             print(lst)
-            update.message.bot.forward_message(chat_id=lst,
-                                               from_chat_id="@asdfghsgda",
-                                               message_id=update.message.message_id)
-            # context.bot.send_message(chat_id=lst, text=update.message.text)
-
-    # update.message.bot.forward_message(chat_id=update.message.chat_id,
-    # from_chat_id=-1926801217,
-    # message_id=update.message.message_id)
-
-    # chat_id = update.message.chat_id
-    # message_id = update.message.message_id
-    # for tosh in toshkent:
-    #     if tosh == "Toshkent":
-    #         print("salom")
-    #         update.message.bot.forward_message(update.message.chat_id, "@asdfghsgda", update.message.message_id)
-    #
-    # update.message.bot.forward_message(chat_id=update.effective_message.chat_id,
-    #                                    from_chat_id="@asdfghsgda",
-    #                                    message_id=update.message.message_id)
-    # update.message.bot.delete_message(chat_id=update.message.chat_id,
-    #                                   message_id=update.message.message_id)
-
-    # if update.message.chat.type == "private":
-    #     bot.reply_to(update.message, update.message.text)
-    # elif update.message.chat.type == "group":
-    #     bot.reply_to(update.message, "Hello to all!")
+            for tosh in tashkent_name:
+                if tosh in update.message.text:
+                    update.message.bot.forward_message(chat_id=lst,
+                                                       from_chat_id="@asdfghsgda",
+                                                       message_id=update.message.message_id)
+        print(update.message['text'])
+        # for tosh in toshkent:
+        #     re_text = re.findall(tosh, update.message.message_id)
+        #     print(re)
 
 
 def Andijan_loads(update, context):
-    update.message.reply_text(
-        'Endi men sizga Andijon dagi yuklarni yuborib turaman 😊')
+    if update.message.chat.type == "private":
+        update.message.reply_text(
+            'Endi men sizga Andijon dagi yuklarni yuborib turaman 😊')
+        a_list.add(update.message.from_user.id)
+        print(a_list)
+    elif update.message.chat.type == "supergroup":
+        # print(update.message.from_user.id)
+        # context.user_data["hudud"] = "Tashkent"
+        for ast in a_list:
+            print(ast)
+            for andijan in andijon_name:
+                if andijan in update.message.text:
+                    update.message.bot.forward_message(chat_id=ast,
+                                                       from_chat_id="@asdfghsgda",
+                                                       message_id=update.message.message_id)
 
 
 def Ferghana_loads(update, context):
-    update.message.reply_text(
-        'Endi men sizga Farg\'ona dagi yuklarni yuborib turaman 😊')
+    if update.message.chat.type == "private":
+        update.message.reply_text(
+            'Endi men sizga Farg\'ona dagi yuklarni yuborib turaman 😊')
+        f_list.add(update.message.from_user.id)
+        print(f_list)
+    elif update.message.chat.type == "supergroup":
+        # print(update.message.from_user.id)
+        # context.user_data["hudud"] = "Tashkent"
+        for fst in f_list:
+            print(fst)
+            for fergana in fergana_name:
+                if fergana in update.message.text:
+                    update.message.bot.forward_message(chat_id=fst,
+                                                       from_chat_id="@asdfghsgda",
+                                                       message_id=update.message.message_id)
 
 
 def Namangan_loads(update, context):
@@ -140,17 +131,18 @@ def Karakalpak_loads(update, context):
         'Endi men sizga Qoraqolpoqiston dagi yuklarni yuborib turaman 😊')
 
 
-updater = Updater('5382011252:AAFKaNGc0_KR4rzYtpa2nf8jOFn1zxfT7p0', use_context=True)
+updater = Updater(token='5382011252:AAFKaNGc0_KR4rzYtpa2nf8jOFn1zxfT7p0', use_context=True)
+dispatcher = updater.dispatcher
 
 
 def main():
-    dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(MessageHandler(Filters.regex('^(' + Tashkent + ')$'), Tashkent_loads))
-    dispatcher.add_handler(MessageHandler(Filters.regex('^(' + Andijan + ')$'), Andijan_loads))
-    dispatcher.add_handler(MessageHandler(Filters.regex('^(' + Ferghana + ')$'), Ferghana_loads))
-
-    # dispatcher.add_handler(CallbackQueryHandler(inline_callback))
+    for tash_name in tashkent_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + tash_name + ')'), Tashkent_loads))
+    for anjan_name in andijon_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + anjan_name + ')'), Andijan_loads))
+    for ferg_name in fergana_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + ferg_name + ')'), Ferghana_loads))
 
     #     conv_handler = ConversationHandler(
     #         entry_points=[CommandHandler('start', start),
