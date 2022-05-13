@@ -7,3 +7,5 @@ jizzakh_name = ["Jizzax", "Jizzah", "Жиззах", "Джиззах", "Zomin"]
 samarkand_name = ["Samarqand", "Samarqant", "Urgut", "Самарканд", "Самаркант"]
 bukhara_name = ["Buxoro", "Бухоро", "Бухара"]
 navoi_name = ["Navoi", "Navoiy", "Навои", "Наваи", "Навоий"]
+
+
