@@ -3,7 +3,8 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
 
 # Local files --------------------------------------------------------------------------------------------------
 from cities import (fergana_name, andijon_name, tashkent_name, namangan_name, sirdarya_name, jizzakh_name,
-                    samarkand_name, bukhara_name, navoi_name)
+                    samarkand_name, bukhara_name, navoi_name, kashkadarya_name, surkhandarya_name, xorezm_name,
+                    karakalpak_name, )
 from Keyboards import main_buttons
 
 STATE_CALENDAR = 1
@@ -19,6 +20,9 @@ samarkand_users = set()
 bukhara_users = set()
 navoi_users = set()
 kashkadarya_users = set()
+surkhandarya_users = set()
+xorezm_users = set()
+karakalpak_users = set()
 
 
 def start(update, context):
@@ -40,8 +44,7 @@ def Tashkent_loads(update, context):
         t_list.add(update.message.from_user.id)
         print(t_list)
     elif update.message.chat.type == "supergroup":
-        # print(update.message.from_user.id)
-        # context.user_data["hudud"] = "Tashkent"
+        print(update.message.text.lower())
         for lst in t_list:
             print(lst)
             for tosh in tashkent_name:
@@ -49,7 +52,6 @@ def Tashkent_loads(update, context):
                     update.message.bot.forward_message(chat_id=lst,
                                                        from_chat_id="@asdfghsgda",
                                                        message_id=update.message.message_id)
-        print(update.message['text'])
 
 
 def Andijan_loads(update, context):
@@ -175,30 +177,57 @@ def Navoi_loads(update, context):
 def Kashkadarya_loads(update, context):
     if update.message.chat.type == "private":
         update.message.reply_text(
-            'Endi men sizga Navoi dagi yuklarni yuborib turaman 😊')
-        navoi_users.add(update.message.from_user.id)
+            'Endi men sizga Qashqadaryo dagi yuklarni yuborib turaman 😊')
+        kashkadarya_users.add(update.message.from_user.id)
     elif update.message.chat.type == "supergroup":
-        for navoi_list in navoi_users:
-            for navoi in navoi_name:
-                if navoi in update.message.text:
-                    update.message.bot.forward_message(chat_id=navoi_list,
+        for kashkadarya_list in kashkadarya_users:
+            for kashkadarya in kashkadarya_name:
+                if kashkadarya in update.message.text:
+                    update.message.bot.forward_message(chat_id=kashkadarya_list,
                                                        from_chat_id="@asdfghsgda",
                                                        message_id=update.message.message_id)
 
 
 def Surkhandarya_loads(update, context):
-    update.message.reply_text(
-        'Endi men sizga Surxondaryo dagi yuklarni yuborib turaman 😊')
+    if update.message.chat.type == "private":
+        update.message.reply_text(
+            'Endi men sizga Surxondaryo dagi yuklarni yuborib turaman 😊')
+        surkhandarya_users.add(update.message.from_user.id)
+    elif update.message.chat.type == "supergroup":
+        for surkhandarya_list in surkhandarya_users:
+            for surkhandarya in kashkadarya_name:
+                if surkhandarya in update.message.text:
+                    update.message.bot.forward_message(chat_id=surkhandarya_list,
+                                                       from_chat_id="@asdfghsgda",
+                                                       message_id=update.message.message_id)
 
 
 def Xorezm_loads(update, context):
-    update.message.reply_text(
-        'Endi men sizga Xorazm dagi yuklarni yuborib turaman 😊')
+    if update.message.chat.type == "private":
+        update.message.reply_text(
+            'Endi men sizga Xorazm dagi yuklarni yuborib turaman 😊')
+        xorezm_users.add(update.message.from_user.id)
+    elif update.message.chat.type == "supergroup":
+        for xorezm_list in xorezm_users:
+            for xorezm in xorezm_name:
+                if xorezm in update.message.text:
+                    update.message.bot.forward_message(chat_id=xorezm_list,
+                                                       from_chat_id="@asdfghsgda",
+                                                       message_id=update.message.message_id)
 
 
 def Karakalpak_loads(update, context):
-    update.message.reply_text(
-        'Endi men sizga Qoraqolpoqiston dagi yuklarni yuborib turaman 😊')
+    if update.message.chat.type == "private":
+        update.message.reply_text(
+            'Endi men sizga Qoraqalpog\'iston dagi yuklarni yuborib turaman 😊')
+        karakalpak_users.add(update.message.from_user.id)
+    elif update.message.chat.type == "supergroup":
+        for karakalpak_list in karakalpak_users:
+            for karakalpak in karakalpak_name:
+                if karakalpak in update.message.text:
+                    update.message.bot.forward_message(chat_id=karakalpak_list,
+                                                       from_chat_id="@asdfghsgda",
+                                                       message_id=update.message.message_id)
 
 
 updater = Updater(token='5382011252:AAFKaNGc0_KR4rzYtpa2nf8jOFn1zxfT7p0', use_context=True)
@@ -221,7 +250,20 @@ def main():
         dispatcher.add_handler(MessageHandler(Filters.regex('(' + jizza_name + ')'), Djizzak_loads))
     for sam_name in samarkand_name:
         dispatcher.add_handler(MessageHandler(Filters.regex('(' + sam_name + ')'), Samarkand_loads))
+    for bukh_name in bukhara_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + bukh_name + ')'), Bukhara_loads))
+    for nav_name in navoi_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + nav_name + ')'), Navoi_loads))
+    for kashka_name in kashkadarya_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + kashka_name + ')'), Kashkadarya_loads))
+    for surkhan_name in surkhandarya_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + surkhan_name + ')'), Surkhandarya_loads))
+    for xorez_name in xorezm_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + xorez_name + ')'), Xorezm_loads))
+    for karak_name in karakalpak_name:
+        dispatcher.add_handler(MessageHandler(Filters.regex('(' + karak_name + ')'), Karakalpak_loads))
 
+    # updated by Burxon
     #     conv_handler = ConversationHandler(
     #         entry_points=[CommandHandler('start', start),
     #                       MessageHandler(Filters.regex('^(' + Tashkent + ')$'), Tashkent_loads),
