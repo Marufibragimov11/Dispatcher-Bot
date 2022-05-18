@@ -11,3 +11,5 @@ kashkadarya_users = set()
 surkhandarya_users = set()
 xorezm_users = set()
 karakalpak_users = set()
+
+users_list = set()

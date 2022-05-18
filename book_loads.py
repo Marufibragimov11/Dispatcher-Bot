@@ -1,7 +1,3 @@
-import sqlite3
-
-from telegram.ext import (Updater, CommandHandler, MessageHandler, ConversationHandler, Filters)
-from sold_loads import city1_name, city2_name, time1, time2, notes
 from users_list import (t_list, f_list, a_list, n_list, sirdarya_users, jizzakh_users, samarkand_users, bukhara_users,
                         navoi_users, kashkadarya_users, surkhandarya_users, xorezm_users, karakalpak_users)
 from buttons import load_buttons, button_to_back

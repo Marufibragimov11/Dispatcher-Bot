@@ -1,11 +1,9 @@
 from telegram.ext import (Updater, CommandHandler, MessageHandler, ConversationHandler, Filters)
 
 from buttons import start_buttons, back_button
-from sold_loads import (city1_name, city2_name, time1, time2, notes,
-                        start_conversation, pu_city, del_city, del_time, pu_time, truck, note)
+from sold_loads import (start_conversation, pu_city, del_city, del_time, pu_time, truck, note)
 from book_loads import (search_loads, Tashkent_loads, Ferghana_loads, Andijan_loads)
-
-users_list = set()
+from users_list import users_list
 
 
 def start(update, context):

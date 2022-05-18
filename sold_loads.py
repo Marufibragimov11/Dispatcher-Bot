@@ -1,16 +1,7 @@
-import sqlite3
-
 from telegram.ext import (Updater, CommandHandler, MessageHandler, ConversationHandler, Filters)
 from buttons import back_button
 from users_list import (t_list, f_list, a_list, n_list, sirdarya_users, jizzakh_users, samarkand_users, bukhara_users,
                         navoi_users, kashkadarya_users, surkhandarya_users, xorezm_users, karakalpak_users)
-
-city1_name = []
-city2_name = []
-time1 = []
-time2 = []
-type_of_truck = []
-notes = []
 
 
 def start_conversation(update, text):
@@ -21,7 +12,6 @@ def start_conversation(update, text):
 def pu_city(update, context):
     global PickUp_city
     PickUp_city = update.message.text
-    city1_name.append(PickUp_city)
     update.message.reply_text(text="Qaysi shaxarga yukni yetkazish kerak🏬")
     return 2
 
@@ -29,7 +19,6 @@ def pu_city(update, context):
 def del_city(update, context):
     global del_cities
     del_cities = update.message.text
-    city2_name.append(del_cities)
     update.message.reply_text(text="Qaysi vaqtda yukni olish kerak⏰ \n"
                                    "kun/oy/yil formatida yozing \n"
                                    "Misol: 31.12.2022")
@@ -39,7 +28,6 @@ def del_city(update, context):
 def pu_time(update, context):
     global time_to_pu
     time_to_pu = update.message.text
-    time1.append(time_to_pu)
     update.message.reply_text(text="Qaysi vaqtda yukni yetkazish kerak⏰ \n"
                                    "kun/oy/yil formatida yozing \n"
                                    "Misol: 31.12.2022"
@@ -50,7 +38,6 @@ def pu_time(update, context):
 def del_time(update, context):
     global time_to_del
     time_to_del = update.message.text
-    time2.append(time_to_del)
     update.message.reply_text(text="🚚 Kerakli yuk mashinasinini kiriting")
     return 5
 
@@ -58,7 +45,6 @@ def del_time(update, context):
 def truck(update, context):
     global truck_type
     truck_type = update.message.text
-    type_of_truck.append(truck_type)
     update.message.reply_text(text="📋Qo'shimcha ma'lumotlarni va telefon raqamingizni yozib qoldiring")
     return 6
 
@@ -67,7 +53,6 @@ def note(update, context):
     global notebook
     user = update.message.chat.username
     notebook = update.message.text
-    notes.append(notebook)
     update.message.reply_text(f"Ma'lumotlaringizni tekshiring va to'g'riligini tasdiqlang✅ \n"
                               f"\n🏬Yuk olinadigan manzil: *{PickUp_city}* \n"
                               f"\n⏰Yuk olish vaqti: *{time_to_pu}* \n"
