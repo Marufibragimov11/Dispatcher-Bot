@@ -35,3 +35,10 @@ def Ferghana_loads(update, context):
                               reply_markup=button_to_back)
     f_list.add(update.message.from_user.id)
     print(f_list)
+
+
+def Sirdarya_loads(update, context):
+    update.message.reply_text('Endi men sizga Sirdaryo dagi yuklarni yuborib turaman 😊',
+                              reply_markup=button_to_back)
+    sirdarya_users.add(update.message.from_user.id)
+    print(sirdarya_users)

@@ -1,7 +1,8 @@
 from telegram.ext import (Updater, CommandHandler, MessageHandler, ConversationHandler, Filters)
 
 from buttons import start_buttons, back_button
-from sold_loads import (start_conversation, pu_city, del_city, del_time, pu_time, truck, note)
+from sold_loads import (start_conversation, pu_location, pu_city, del_location, del_city, del_time, pu_time, truck,
+                        note, submit)
 from book_loads import (search_loads, Tashkent_loads, Ferghana_loads, Andijan_loads)
 from users_list import users_list
 
@@ -32,17 +33,21 @@ def main():
         ConversationHandler(
             entry_points=[MessageHandler(Filters.regex('^(Yuk sotaman)$'), start_conversation)],
             states={
-                1: [MessageHandler(Filters.text, pu_city)],
-                2: [MessageHandler(Filters.text, del_city)],
-                3: [MessageHandler(Filters.text, pu_time)],
-                4: [MessageHandler(Filters.text, del_time)],
-                5: [MessageHandler(Filters.text, truck)],
-                6: [MessageHandler(Filters.text, note)],
+                1: [MessageHandler(Filters.text, pu_location)],
+                2: [MessageHandler(Filters.text, pu_city)],
+                3: [MessageHandler(Filters.text, del_location)],
+                4: [MessageHandler(Filters.text, del_city)],
+                5: [MessageHandler(Filters.text, pu_time)],
+                6: [MessageHandler(Filters.text, del_time)],
+                7: [MessageHandler(Filters.text, truck)],
+                8: [MessageHandler(Filters.text, note)],
+                9: [MessageHandler(Filters.text, submit)]
             },
             fallbacks=[CommandHandler('stop', start)]
         )
     )
-    dispatcher.add_handler(MessageHandler(Filters.regex('(Tasdiqlash✅)'), start))
+    dispatcher.add_handler(MessageHandler(Filters.regex('(🏠Bosh menu)'), start))
+    dispatcher.add_handler(MessageHandler(Filters.regex('(❌Bekor qilish)'), start))
     dispatcher.add_handler(MessageHandler(Filters.regex('(Yuk olaman)'), search_loads))
     dispatcher.add_handler(MessageHandler(Filters.regex('(Ortga)'), search_loads))
     dispatcher.add_handler(MessageHandler(Filters.regex('(Toshkent)'), Tashkent_loads))
