@@ -1,8 +1,10 @@
 from telegram import ReplyKeyboardRemove
-from telegram.ext import (Updater, CommandHandler, MessageHandler, ConversationHandler, Filters)
+from telegram.ext import ConversationHandler
 from buttons import back_button, city_buttons, main_menu
 from users_list import (t_list, f_list, a_list, n_list, sirdarya_users, jizzakh_users, samarkand_users, bukhara_users,
-                        navoi_users, kashkadarya_users, surkhandarya_users, xorezm_users, karakalpak_users)
+                        navoi_users, kashkadarya_users, surkhandarya_users, xorezm_users, karakalpak_users,
+                        kirgizistan_users, tajikistan_users, kazakstan_users, rossia_users, turkey_users, china_users,
+                        yevropa_users)
 
 
 def start_conversation(update, text):
@@ -94,39 +96,235 @@ def note(update, context):
 
 
 def submit(update, context):
-    update.message.reply_text(text=f"*Sizning postingiz {PickUp_city}dagi haydovchilarga yuborildi😉* \n",
+    update.message.reply_text(text=f"*Sizning postingiz {pick_location}dagi haydovchilarga yuborildi😉* \n",
                               parse_mode="Markdown",
                               reply_markup=main_menu)
+    update.message.bot.send_message(chat_id="@yuklar_asia_usb",
+                                    text=f"📌Yuk olinadigan manzil: *{pick_location} - {PickUp_city}* \n"
+                                         f"🕘Yuk olish vaqti: *{time_to_pu}* \n"
+                                         f"\n📌Yukni yetkazib berish manzili: *{delivery_location} - {del_cities}* \n"
+                                         f"🕘Yukni yetkazib berish vaqti: *{time_to_del}* \n"
+                                         f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
+                                         f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{notebook}*",
+                                    parse_mode="Markdown")
+    if pick_location == "🇺🇿Toshkent":
+        for tst in t_list:
+            update.message.bot.send_message(chat_id=tst,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Andijon":
+        for ast in a_list:
+            update.message.bot.send_message(chat_id=ast,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Farg'ona":
+        for fst in f_list:
+            update.message.bot.send_message(chat_id=fst,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Namangan":
+        for nam in n_list:
+            update.message.bot.send_message(chat_id=nam,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Sirdaryo":
+        for sir in sirdarya_users:
+            update.message.bot.send_message(chat_id=sir,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Jizzax":
+        for jiz in jizzakh_users:
+            update.message.bot.send_message(chat_id=jiz,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Samarqand":
+        for sam in samarkand_users:
+            update.message.bot.send_message(chat_id=sam,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Buxoro":
+        for buk in bukhara_users:
+            update.message.bot.send_message(chat_id=buk,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Navoi":
+        for nav in navoi_users:
+            update.message.bot.send_message(chat_id=nav,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Qashqadaryo":
+        for kas in kashkadarya_users:
+            update.message.bot.send_message(chat_id=kas,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Surxondaryo":
+        for sur in surkhandarya_users:
+            update.message.bot.send_message(chat_id=sur,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Xorazm":
+        for xor in xorezm_users:
+            update.message.bot.send_message(chat_id=xor,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇿Qoraqolpoqston":
+        for kar in karakalpak_users:
+            update.message.bot.send_message(chat_id=kar,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇰🇬Qirg'iziston":
+        for kir in kirgizistan_users:
+            update.message.bot.send_message(chat_id=kir,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇹🇯Tojikiston":
+        for taj in tajikistan_users:
+            update.message.bot.send_message(chat_id=taj,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇰🇿Qozoqston":
+        for kaz in kazakstan_users:
+            update.message.bot.send_message(chat_id=kaz,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇷🇺Rossiya":
+        for ros in rossia_users:
+            update.message.bot.send_message(chat_id=ros,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇹🇷Turkiya":
+        for tur in turkey_users:
+            update.message.bot.send_message(chat_id=tur,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇨🇳Xitoy":
+        for chn in china_users:
+            update.message.bot.send_message(chat_id=chn,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
+    elif pick_location == "🇺🇳Yevropa":
+        for yev in yevropa_users:
+            update.message.bot.send_message(chat_id=yev,
+                                            text=f"\n📌Yuk olinadigan manzil: <b>{pick_location} - {PickUp_city}</b> \n"
+                                                 f"🕘Yuk olish vaqti: <b>{time_to_pu}</b> \n"
+                                                 f"\n📌Yukni yetkazib berish manzili: <b>{delivery_location} - {del_cities}</b> \n"
+                                                 f"🕘Yukni yetkazib berish vaqti: <b>{time_to_del}</b> \n"
+                                                 f"\n🚚Kerakli yuk mashinasi: <b>{truck_type}</b>\n"
+                                                 f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
+                                                 f"\n👤Yuk sotuvchining telegram username: @{user}",
+                                            parse_mode="html")
     return ConversationHandler.END
-
-    # if pick_location == "🇺🇿Toshkent":
-    #     update.message.bot.send_message(chat_id=t_list,
-    #                                     text=f"\n📌Yuk olinadigan manzil: *{pick_location} - {PickUp_city}* \n"
-    #                                          f"🕘Yuk olish vaqti: *{time_to_pu}* \n"
-    #                                          f"\n📌Yukni yetkazib berish manzili: *{delivery_location} - {del_cities}* \n"
-    #                                          f"🕘Yukni yetkazib berish vaqti: *{time_to_del}* \n"
-    #                                          f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
-    #                                          f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{notebook}* \n"
-    #                                          f"\n👤Yuk sotuvchining telegram username: {user}",
-    #                                     parse_mode="Markdown")
-
-    # elif PickUp_city == "Andijon":
-    #     for ast in a_list:
-    #         update.message.bot.send_message(chat_id=ast,
-    #                                         text=f"\n🏬Yuk olinadigan manzil: *{PickUp_city}* \n"
-    #                                              f"\n⏰Yuk olish vaqti: *{time_to_pu}* \n"
-    #                                              f"\n🏬Yukni yetkazib berish manzili: *{del_cities}* \n"
-    #                                              f"\n⏰Yukni yetkazib berish vaqti: *{time_to_del}* \n"
-    #                                              f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
-    #                                              f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{notebook}*",
-    #                                         parse_mode="Markdown")
-    # elif PickUp_city == "Farg'ona":
-    #     for fst in f_list:
-    #         update.message.bot.send_message(chat_id=fst,
-    #                                         text=f"\n🏬Yuk olinadigan manzil: *{PickUp_city}* \n"
-    #                                              f"\n⏰Yuk olish vaqti: *{time_to_pu}* \n"
-    #                                              f"\n🏬Yukni yetkazib berish manzili: *{del_cities}* \n"
-    #                                              f"\n⏰Yukni yetkazib berish vaqti: *{time_to_del}* \n"
-    #                                              f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
-    #                                              f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{notebook}*",
-    #                                         parse_mode="Markdown")
