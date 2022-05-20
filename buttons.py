@@ -1,7 +1,7 @@
 from telegram import ReplyKeyboardMarkup
 
 start_buttons = ReplyKeyboardMarkup([
-    ["Yuk sotaman", "Yuk olaman"]
+    ["🚛Yuk bor", "🚛Yuk kerak"]
 ], resize_keyboard=True)
 
 main_menu = ReplyKeyboardMarkup([
@@ -9,11 +9,11 @@ main_menu = ReplyKeyboardMarkup([
 ], resize_keyboard=True)
 
 back_button = ReplyKeyboardMarkup([
-    ["✅Tasdiqlash", "❌Bekor qilish"]
+    ["✅Tasdiqlash"]
 ], resize_keyboard=True)
 
 button_to_back = ReplyKeyboardMarkup([
-    ["Ortga"]
+    ["↩️Ortga"]
 ], resize_keyboard=True)
 
 city_buttons = ReplyKeyboardMarkup([
@@ -21,5 +21,7 @@ city_buttons = ReplyKeyboardMarkup([
     ["🇺🇿Samarqand", "🇺🇿Buxoro", "🇺🇿Navoi"],
     ["🇺🇿Qashqadaryo", "🇺🇿Surxondaryo", "🇺🇿Xorazm"], ["🇺🇿Qoraqolpoqston"],
     ["🇰🇬Qirg'iziston", "🇹🇯Tojikiston", "🇰🇿Qozoqston"],
-    ["🇷🇺Rossiya", "🇹🇷Turkiya", "🇨🇳Xitoy"], ["🇺🇳Yevropa"]
+    ["🇷🇺Rossiya", "🇹🇷Turkiya", "🇨🇳Xitoy"], ["🇺🇳Yevropa"], ["🏠Bosh menu"]
 ], resize_keyboard=True)
+
+# , "❌Bekor qilish"

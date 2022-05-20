@@ -9,7 +9,7 @@ def search_loads(update, context):
     update.message.reply_text(text="Quyidagi knopkalardan birini tanlang", reply_markup=city_buttons)
     text = update.message.text
     user_id = update.message.from_user.id
-    if text == "Ortga":
+    if text == "↩️Ortga":
         if user_id in t_list:
             t_list.remove(user_id)
         elif user_id in a_list:

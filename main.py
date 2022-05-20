@@ -14,18 +14,11 @@ def start(update, context):
     user = update.message.from_user
     update.message.reply_html(
         "Salom <b>{}!</b>\n "
-        "<b>Men sizga kerakli shaxardan yuklarni ko'rsatib beraman</b>\n "
-        "<b>Quyidagi knopkalardan birini tanlang: </b>".format(user.first_name),
+        "<b>Yukingiz bo'lsa yoki yuk kerak bo'lsa men xizmatingizdaman</b>\n "
+        "<b>Quyidagi knopkalardan birini tanlang:👇 </b>".format(user.first_name),
         reply_markup=start_buttons)
     users_list.add(update.message.chat.id)
     update.message.bot.send_message(chat_id="@asdfghsgda",
-                                    text="Guruhda yangi a'zo bor 😊 \n"
-                                         f"Ismi: {update.message.chat.first_name} \n"
-                                         f"Familiyasi: {update.message.chat.last_name} \n"
-                                         f"Username: {update.message.chat.username}\n"
-                                         f"Chat_id: {update.message.chat.id} \n"
-                                         f"\nUmumiy foydalanuvchilar soni: {len(users_list)}")
-    update.message.bot.send_message(chat_id="@",
                                     text="Guruhda yangi a'zo bor 😊 \n"
                                          f"Ismi: {update.message.chat.first_name} \n"
                                          f"Familiyasi: {update.message.chat.last_name} \n"
@@ -42,7 +35,7 @@ def main():
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(
         ConversationHandler(
-            entry_points=[MessageHandler(Filters.regex('^(Yuk sotaman)$'), start_conversation)],
+            entry_points=[MessageHandler(Filters.regex('(🚛Yuk bor)'), start_conversation)],
             states={
                 1: [MessageHandler(Filters.text, pu_location)],
                 2: [MessageHandler(Filters.text, pu_city)],
@@ -57,10 +50,10 @@ def main():
             fallbacks=[CommandHandler('stop', start)]
         )
     )
+    # dispatcher.add_handler(MessageHandler(Filters.regex('(❌Bekor qilish)'), start))
     dispatcher.add_handler(MessageHandler(Filters.regex('(🏠Bosh menu)'), start))
-    dispatcher.add_handler(MessageHandler(Filters.regex('(❌Bekor qilish)'), start))
-    dispatcher.add_handler(MessageHandler(Filters.regex('(Yuk olaman)'), search_loads))
-    dispatcher.add_handler(MessageHandler(Filters.regex('(Ortga)'), search_loads))
+    dispatcher.add_handler(MessageHandler(Filters.regex('(🚛Yuk kerak)'), search_loads))
+    dispatcher.add_handler(MessageHandler(Filters.regex('(↩️Ortga)'), search_loads))
     dispatcher.add_handler(MessageHandler(Filters.regex('(Toshkent)'), Tashkent_loads))
     dispatcher.add_handler(MessageHandler(Filters.regex('(Andijon)'), Andijan_loads))
     dispatcher.add_handler(MessageHandler(Filters.regex("(Farg'ona)"), Ferghana_loads))

@@ -85,7 +85,7 @@ def note(update, context):
     notebook = update.message.text
     update.message.reply_text(f"Ma'lumotlaringizni tekshiring va to'g'riligini tasdiqlang✅ \n"
                               f"\n📌Yuk olinadigan manzil: *{pick_location} - {PickUp_city}* \n"
-                              f"🕘Yuk olish vaqti: *{time_to_pu}* \n"
+                              f"🕘Yukni olish vaqti: *{time_to_pu}* \n"
                               f"\n📌Yukni yetkazib berish manzili: *{delivery_location} - {del_cities}* \n"
                               f"🕘Yukni yetkazib berish vaqti: *{time_to_del}* \n"
                               f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
