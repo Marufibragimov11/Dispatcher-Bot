@@ -27,7 +27,6 @@ def start(update, context):
                                          f"\nUmumiy foydalanuvchilar soni: {len(users_list)}")
 
 
-
 def main():
     updater = Updater(token='5382011252:AAFKaNGc0_KR4rzYtpa2nf8jOFn1zxfT7p0', use_context=True)
     dispatcher = updater.dispatcher

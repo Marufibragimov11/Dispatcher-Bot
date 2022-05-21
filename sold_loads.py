@@ -6,8 +6,10 @@ from users_list import (t_list, f_list, a_list, n_list, sirdarya_users, jizzakh_
                         kirgizistan_users, tajikistan_users, kazakstan_users, rossia_users, turkey_users, china_users,
                         yevropa_users)
 
+words = []
 
-def start_conversation(update, text):
+
+def start_conversation(update, context):
     update.message.reply_text(text="*Qaysi davlat yoki shaxardan yukni olish kerak*🧐",
                               parse_mode="Markdown",
                               reply_markup=city_buttons)
@@ -16,8 +18,16 @@ def start_conversation(update, text):
 
 def pu_location(update, context):
     global pick_location
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     pick_location = update.message.text
-    update.message.reply_text(text=f"*{pick_location}ning aynan qaysi tumanidan yoki shaxaridan yukni olish kerak*🧐",
+    update.message.reply_text(text=f"*{words[0]}ning aynan qaysi tumanidan yoki shaxaridan yukni olish kerak*🧐",
                               parse_mode="Markdown",
                               reply_markup=ReplyKeyboardRemove())
     return 2
@@ -25,6 +35,14 @@ def pu_location(update, context):
 
 def pu_city(update, context):
     global PickUp_city
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     PickUp_city = update.message.text
     update.message.reply_text(text="*Qaysi davlat yoki shaxarga yukni yetkazish kerak*🧐",
                               parse_mode="Markdown",
@@ -34,9 +52,17 @@ def pu_city(update, context):
 
 def del_location(update, context):
     global delivery_location
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     delivery_location = update.message.text
     update.message.reply_text(
-        text=f"*{delivery_location}ning aynan qaysi tumaniga yoki shaxariga yukni yetkazish kerak*🧐",
+        text=f"*{words[2]}ning aynan qaysi tumaniga yoki shaxariga yukni yetkazish kerak*🧐",
         parse_mode="Markdown",
         reply_markup=ReplyKeyboardRemove())
     return 4
@@ -44,6 +70,14 @@ def del_location(update, context):
 
 def del_city(update, context):
     global del_cities
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     del_cities = update.message.text
     update.message.reply_text(text="*Qaysi vaqtda yukni olish kerak*🧐 \n"
                                    "kun/oy/yil formatida yozing \n"
@@ -54,6 +88,14 @@ def del_city(update, context):
 
 def pu_time(update, context):
     global time_to_pu
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     time_to_pu = update.message.text
     update.message.reply_text(text="*Qaysi vaqtda yukni yetkazish kerak*🧐 \n"
                                    "kun/oy/yil formatida yozing \n"
@@ -64,6 +106,14 @@ def pu_time(update, context):
 
 def del_time(update, context):
     global time_to_del
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     time_to_del = update.message.text
     update.message.reply_text(text="*Kerakli yuk mashinasinini kiriting*🚚",
                               parse_mode="Markdown")
@@ -72,6 +122,14 @@ def del_time(update, context):
 
 def truck(update, context):
     global truck_type
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     truck_type = update.message.text
     update.message.reply_text(text="*Qo'shimcha ma'lumotlarni va telefon raqamingizni yozib qoldiring*📋",
                               parse_mode="Markdown")
@@ -81,31 +139,46 @@ def truck(update, context):
 def note(update, context):
     global notebook
     global user
+
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
     user = update.message.chat.username
     notebook = update.message.text
     update.message.reply_text(f"Ma'lumotlaringizni tekshiring va to'g'riligini tasdiqlang✅ \n"
-                              f"\n📌Yuk olinadigan manzil: *{pick_location} - {PickUp_city}* \n"
-                              f"🕘Yukni olish vaqti: *{time_to_pu}* \n"
-                              f"\n📌Yukni yetkazib berish manzili: *{delivery_location} - {del_cities}* \n"
-                              f"🕘Yukni yetkazib berish vaqti: *{time_to_del}* \n"
-                              f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
-                              f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{notebook}*",
+                              f"\n📌Yuk olinadigan manzil: *{words[0]} - {words[1]}* \n"
+                              f"🕘Yukni olish vaqti: *{words[4]}* \n"
+                              f"\n📌Yukni yetkazib berish manzili: *{words[2]} - {words[3]}* \n"
+                              f"🕘Yukni yetkazib berish vaqti: *{words[5]}* \n"
+                              f"\n🚚Kerakli yuk mashinasi: {words[6]} \n"
+                              f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{words[7]}*",
                               parse_mode="Markdown",
                               reply_markup=back_button)
     return 9
 
 
 def submit(update, context):
-    update.message.reply_text(text=f"*Sizning postingiz {pick_location}dagi haydovchilarga yuborildi😉* \n",
+    if context.user_data.get('text'):
+        words = context.user_data['text']
+    else:
+        words = []
+    words.append(update.message.text)
+    context.user_data['text'] = words
+
+    update.message.reply_text(text=f"*Sizning postingiz {words[0]}dagi haydovchilarga yuborildi😉* \n",
                               parse_mode="Markdown",
                               reply_markup=main_menu)
     update.message.bot.send_message(chat_id="@yuklar_asia_usb",
-                                    text=f"📌Yuk olinadigan manzil: *{pick_location} - {PickUp_city}* \n"
-                                         f"🕘Yuk olish vaqti: *{time_to_pu}* \n"
-                                         f"\n📌Yukni yetkazib berish manzili: *{delivery_location} - {del_cities}* \n"
-                                         f"🕘Yukni yetkazib berish vaqti: *{time_to_del}* \n"
-                                         f"\n🚚Kerakli yuk mashinasi: {truck_type} \n"
-                                         f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{notebook}*",
+                                    text=f"\n📌Yuk olinadigan manzil: *{words[0]} - {words[1]}* \n"
+                                         f"🕘Yukni olish vaqti: *{words[4]}* \n"
+                                         f"\n📌Yukni yetkazib berish manzili: *{words[2]} - {words[3]}* \n"
+                                         f"🕘Yukni yetkazib berish vaqti: *{words[5]}* \n"
+                                         f"\n🚚Kerakli yuk mashinasi: {words[6]} \n"
+                                         f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{words[7]}*",
                                     parse_mode="Markdown")
     if pick_location == "🇺🇿Toshkent":
         for tst in t_list:
@@ -118,6 +191,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Andijon":
         for ast in a_list:
             update.message.bot.send_message(chat_id=ast,
@@ -129,6 +203,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Farg'ona":
         for fst in f_list:
             update.message.bot.send_message(chat_id=fst,
@@ -140,6 +215,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Namangan":
         for nam in n_list:
             update.message.bot.send_message(chat_id=nam,
@@ -151,6 +227,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Sirdaryo":
         for sir in sirdarya_users:
             update.message.bot.send_message(chat_id=sir,
@@ -162,6 +239,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Jizzax":
         for jiz in jizzakh_users:
             update.message.bot.send_message(chat_id=jiz,
@@ -173,6 +251,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Samarqand":
         for sam in samarkand_users:
             update.message.bot.send_message(chat_id=sam,
@@ -184,6 +263,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Buxoro":
         for buk in bukhara_users:
             update.message.bot.send_message(chat_id=buk,
@@ -195,6 +275,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Navoi":
         for nav in navoi_users:
             update.message.bot.send_message(chat_id=nav,
@@ -206,6 +287,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Qashqadaryo":
         for kas in kashkadarya_users:
             update.message.bot.send_message(chat_id=kas,
@@ -217,6 +299,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Surxondaryo":
         for sur in surkhandarya_users:
             update.message.bot.send_message(chat_id=sur,
@@ -228,6 +311,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Xorazm":
         for xor in xorezm_users:
             update.message.bot.send_message(chat_id=xor,
@@ -239,6 +323,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇿Qoraqolpoqston":
         for kar in karakalpak_users:
             update.message.bot.send_message(chat_id=kar,
@@ -250,6 +335,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇰🇬Qirg'iziston":
         for kir in kirgizistan_users:
             update.message.bot.send_message(chat_id=kir,
@@ -261,6 +347,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇹🇯Tojikiston":
         for taj in tajikistan_users:
             update.message.bot.send_message(chat_id=taj,
@@ -272,6 +359,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇰🇿Qozoqston":
         for kaz in kazakstan_users:
             update.message.bot.send_message(chat_id=kaz,
@@ -283,6 +371,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇷🇺Rossiya":
         for ros in rossia_users:
             update.message.bot.send_message(chat_id=ros,
@@ -294,6 +383,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇹🇷Turkiya":
         for tur in turkey_users:
             update.message.bot.send_message(chat_id=tur,
@@ -305,6 +395,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇨🇳Xitoy":
         for chn in china_users:
             update.message.bot.send_message(chat_id=chn,
@@ -316,6 +407,7 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     elif pick_location == "🇺🇳Yevropa":
         for yev in yevropa_users:
             update.message.bot.send_message(chat_id=yev,
@@ -327,4 +419,5 @@ def submit(update, context):
                                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: <b>{notebook}</b> \n"
                                                  f"\n👤Yuk sotuvchining telegram username: @{user}",
                                             parse_mode="html")
+        words.clear()
     return ConversationHandler.END
