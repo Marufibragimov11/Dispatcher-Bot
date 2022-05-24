@@ -172,14 +172,14 @@ def submit(update, context):
     update.message.reply_text(text=f"*Sizning postingiz {words[0]}dagi haydovchilarga yuborildi😉* \n",
                               parse_mode="Markdown",
                               reply_markup=main_menu)
-    update.message.bot.send_message(chat_id="@yuklar_asia_usb",
-                                    text=f"\n📌Yuk olinadigan manzil: *{words[0]} - {words[1]}* \n"
-                                         f"🕘Yukni olish vaqti: *{words[4]}* \n"
-                                         f"\n📌Yukni yetkazib berish manzili: *{words[2]} - {words[3]}* \n"
-                                         f"🕘Yukni yetkazib berish vaqti: *{words[5]}* \n"
-                                         f"\n🚚Kerakli yuk mashinasi: {words[6]} \n"
-                                         f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{words[7]}*",
-                                    parse_mode="Markdown")
+    context.bot.send_message(chat_id=-1001501839378,
+                             text=f"\n📌Yuk olinadigan manzil: *{words[0]} - {words[1]}* \n"
+                                  f"🕘Yukni olish vaqti: *{words[4]}* \n"
+                                  f"\n📌Yukni yetkazib berish manzili: *{words[2]} - {words[3]}* \n"
+                                  f"🕘Yukni yetkazib berish vaqti: *{words[5]}* \n"
+                                  f"\n🚚Kerakli yuk mashinasi: {words[6]} \n"
+                                  f"\n📋Yuk oluvchi uchun qo'shimcha ma'lumotlar: *{words[7]}*",
+                             parse_mode="Markdown")
     if pick_location == "🇺🇿Toshkent":
         for tst in t_list:
             update.message.bot.send_message(chat_id=tst,

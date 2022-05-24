@@ -28,7 +28,7 @@ def start(update, context):
 
 
 def main():
-    updater = Updater(token='5382011252:AAFKaNGc0_KR4rzYtpa2nf8jOFn1zxfT7p0', use_context=True)
+    updater = Updater(token='5382011252:AAGZ_k7yt-X-Hnoc7c1mh_ne8it28ZOwT74', use_context=True)
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler('start', start))
